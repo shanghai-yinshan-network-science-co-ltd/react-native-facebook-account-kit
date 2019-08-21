@@ -223,8 +223,11 @@ public class RNAccountKitModule extends ReactContextBaseJavaModule implements Ac
         String initialPhoneCountryPrefix = this.options.getString("initialPhoneCountryPrefix");
         String initialPhoneNumber = this.options.getString("initialPhoneNumber");
 
-        PhoneNumber phoneNumber = new PhoneNumber(initialPhoneCountryPrefix, initialPhoneNumber, null);
-        configurationBuilder.setInitialPhoneNumber(phoneNumber);
+
+        if ((!TextUtils.isEmpty(initialPhoneCountryPrefix)) && (!TextUtils.isEmpty(initialPhoneNumber))) {
+            PhoneNumber phoneNumber = new PhoneNumber(initialPhoneCountryPrefix, initialPhoneNumber, null);
+            configurationBuilder.setInitialPhoneNumber(phoneNumber);
+        }
 
         configurationBuilder.setFacebookNotificationsEnabled(
                 this.options.getBoolean("facebookNotificationsEnabled"));
@@ -238,8 +241,8 @@ public class RNAccountKitModule extends ReactContextBaseJavaModule implements Ac
             configurationBuilder.setReadPhoneStateEnabled(readPhoneStateEnabled);
         }
 
-        boolean setEnableInitialSmsButton = this.options.getBoolean("setEnableInitialSmsButton");
-        configurationBuilder.setEnableInitialSmsButton(setEnableInitialSmsButton);
+//        boolean setEnableInitialSmsButton = this.options.getBoolean("setEnableInitialSmsButton");
+//        configurationBuilder.setEnableInitialSmsButton(setEnableInitialSmsButton);
 
         if (this.options.hasKey("countryBlacklist")) {
             String[] blacklist = formatCountryList(this.options.getArray("countryBlacklist"));
